@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements OptionsDialogFrag
     private int STORAGE_PERMISSION_CODE = 1;
     protected Python py;
     public AsyncTask task;
-    private HashMap<String, String> options = new HashMap<>();
+    private HashMap<String, Object> options = new HashMap<>();
     private String optionsCli = "";
 
 
@@ -339,8 +339,8 @@ public class MainActivity extends AppCompatActivity implements OptionsDialogFrag
                 OptionsDialogFragment dialog = new OptionsDialogFragment();
 
                 Bundle opts = new Bundle();
-                for (Map.Entry<String, String> entry : options.entrySet()) {
-                    opts.putString(entry.getKey(), entry.getValue());
+                for (Map.Entry<String, Object> entry : options.entrySet()) {
+                    opts.putString(entry.getKey(), entry.getValue().toString());
                 }
                 dialog.setArguments(opts);
 
@@ -516,7 +516,7 @@ public class MainActivity extends AppCompatActivity implements OptionsDialogFrag
             // create python dict from options HashMap manually since apparently
             // chaquopy doesn't do it automatically when providing as argument
             PyObject opts = py.getBuiltins().callAttr("dict");
-            for (Map.Entry<String, String> entry : options.entrySet()) {
+            for (Map.Entry<String, Object> entry : options.entrySet()) {
                 opts.callAttr("update", new Kwarg(entry.getKey(), entry.getValue()));
             }
             download_prog.callAttr("download_youtube", user_input, DOWNLOAD_LOCATION, opts); //call youtube-dl python module

@@ -91,15 +91,15 @@ public class OptionsDialogFragment extends DialogFragment {
      *
      * @return HashMap having the non-empty options and its values
      */
-    public HashMap<String, String> getOptions() {
-        HashMap<String, String> options = new HashMap<>();
+    public HashMap<String, Object> getOptions() {
+        HashMap<String, Object> options = new HashMap<>();
 
         if(!playlistStart.getText().toString().equals("")) {
-            options.put(getResources().getString(R.string.playlistStart), playlistStart.getText().toString());
+            options.put(getResources().getString(R.string.playlistStart), Integer.parseInt(playlistStart.getText().toString()));
         }
 
         if(!playlistEnd.getText().toString().equals("")) {
-            options.put(getResources().getString(R.string.playlistEnd), playlistEnd.getText().toString());
+            options.put(getResources().getString(R.string.playlistEnd), Integer.parseInt(playlistEnd.getText().toString()));
         }
 
         if(!playlistItem.getText().toString().equals("")) {
